@@ -14,14 +14,15 @@ const Task = () => {
     const newTaskList = [...taskList];
     newTaskList.push(task);
     setTaskList(newTaskList);
+    setTask("");
     console.log(taskList);
   };
 
-  const deleteTask = (event, index) => {
+  const deleteTask = (index) => {
     const newTaskList = [...taskList];
     newTaskList.splice(index, 1);
     setTaskList(newTaskList);
-    // console.log(ta)
+    console.log(index);
   };
   return (
     <div>
