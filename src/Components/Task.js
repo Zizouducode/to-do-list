@@ -38,8 +38,9 @@ const Task = () => {
           </div>
         );
       })}
-      <form onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <input
+          className="add-task"
           onChange={handleTaskChange}
           type="text"
           placeholder="new task"
