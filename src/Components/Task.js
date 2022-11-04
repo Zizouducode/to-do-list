@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Task = () => {
   const [task, setTask] = useState("");
   const [taskList, setTaskList] = useState([]);
-  const [line, setLine] = useState(true);
+  const [line, setLine] = useState([]);
+  const [test, setTest] = useState([]);
 
   const handleTaskChange = (event) => {
     const value = event.target.value;
@@ -13,11 +14,18 @@ const Task = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newTaskList = [...taskList];
-    newTaskList.push(task);
-    setTaskList(newTaskList);
-    setTask("");
-    console.log(taskList);
+    if (task) {
+      const newTaskList = [...taskList];
+      newTaskList.push(task);
+      setTaskList(newTaskList);
+      setTask("");
+
+      const newLine = [...line];
+      const bool = true;
+      newLine.push(bool);
+      setLine(newLine);
+      console.log(test);
+    }
   };
 
   const handleDeleteTask = (index) => {
@@ -26,20 +34,34 @@ const Task = () => {
     setTaskList(newTaskList);
   };
 
-  const handleCheck = () => {
-    if (line === true) {
-      setLine(false);
-    } else if (line === false) {
-      setLine(true);
+  const handleCheck = (index) => {
+    if (line[index] === true) {
+      const newLine = [...line];
+      const bool = false;
+      newLine.splice(index, 1, bool);
+      setLine(newLine);
+      console.log(test);
+      //   setLine(false);
+    } else if (line[index] === false) {
+      const newLine = [...line];
+      const bool = true;
+      newLine.splice(index, 1, bool);
+      setLine(newLine);
+      //   setLine(true);
     }
+    console.log(line);
   };
   return (
     <div>
       {taskList.map((elem, index) => {
         return (
           <div className="task-list" key={index}>
-            <input onClick={handleCheck} type="checkbox" />
-            <div className={line === true ? "no-line-through" : "line-through"}>
+            <input onClick={() => handleCheck(index)} type="checkbox" />
+            <div
+              className={
+                line[index] === true ? "no-line-through" : "line-through"
+              }
+            >
               {elem}
             </div>
             <FontAwesomeIcon
