@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Task = () => {
   const [task, setTask] = useState("");
   const [taskList, setTaskList] = useState([]);
+  const [line, setLine] = useState(true);
+
   const handleTaskChange = (event) => {
     const value = event.target.value;
     setTask(value);
@@ -18,21 +20,30 @@ const Task = () => {
     console.log(taskList);
   };
 
-  const deleteTask = (index) => {
+  const handleDeleteTask = (index) => {
     const newTaskList = [...taskList];
     newTaskList.splice(index, 1);
     setTaskList(newTaskList);
-    console.log(index);
+  };
+
+  const handleCheck = () => {
+    if (line === true) {
+      setLine(false);
+    } else if (line === false) {
+      setLine(true);
+    }
   };
   return (
     <div>
       {taskList.map((elem, index) => {
         return (
-          <div key={index}>
-            <input type="checkbox" />
-            {elem}
+          <div className="task-list" key={index}>
+            <input onClick={handleCheck} type="checkbox" />
+            <div className={line === true ? "no-line-through" : "line-through"}>
+              {elem}
+            </div>
             <FontAwesomeIcon
-              onClick={() => deleteTask(index)}
+              onClick={() => handleDeleteTask(index)}
               className="icon-small"
               icon="fa-trash-can"
             />

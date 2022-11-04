@@ -64,3 +64,11 @@ button {
   width: 130px;
   font-size: 22px;
 }
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.task-list {
+  display: flex;
+}
